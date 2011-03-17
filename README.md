@@ -1,7 +1,7 @@
-Mule Git Cloud Connector
-========================
+Mule Git Connector
+==================
 
-Mule Cloud connector to git
+Git is a free and open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency. This connector will allow to interact with Git repositories.
 
 Installation
 ------------
@@ -38,7 +38,7 @@ application:
     <dependency>
         <groupId>org.mule.modules</groupId>
         <artifactId>mule-module-git</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
     </dependency>
 
 Configuration
