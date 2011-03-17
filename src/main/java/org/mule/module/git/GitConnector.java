@@ -89,8 +89,7 @@ public class GitConnector
      * <git:add config-ref="s3repo" filePattern="README.txt"/>
      * }
      *
-     * @param filePattern File to add content from. Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all
-     *                    files in the directory, recursively. Fileglobs (e.g. *.c) are not yet supported.
+     * @param filePattern File to add content from. Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all files in the directory, recursively.
      */
     @Operation
     public void add(String filePattern)
@@ -118,11 +117,8 @@ public class GitConnector
      * }
      *
      * @param name       Name of the new branch
-     * @param force      If true and the branch with the given name already exists, the start-point of an
-     *                   existing branch will be set to a new start-point; if false, the existing branch will not be
-     *                   changed.
-     * @param startPoint The new branch head will point to this commit. It may be given as a branch name,
-     *                   a commit-id, or a tag. If this option is omitted, the current HEAD will be used instead.
+     * @param force      If true and the branch with the given name already exists, the start-point of an existing branch will be set to a new start-point; if false, the existing branch will not be changed.
+     * @param startPoint The new branch head will point to this commit. It may be given as a branch name, a commit-id, or a tag. If this option is omitted, the current HEAD will be used instead.
      */
     @Operation
     public void createBranch(String name, @Parameter(optional = true, defaultValue = "false") boolean force, @Parameter(optional = true, defaultValue = "HEAD") String startPoint)
@@ -151,8 +147,7 @@ public class GitConnector
      * }
      *
      * @param name  Name of the branch to delete
-     * @param force If false a check will be performed whether the branch to be deleted is already merged into the
-     *              current branch and deletion will be refused in this case
+     * @param force If false a check will be performed whether the branch to be deleted is already merged into the current branch and deletion will be refused in this case
      */
     @Operation
     public void deleteBranch(String name, boolean force)

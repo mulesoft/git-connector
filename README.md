@@ -89,8 +89,7 @@ Add file contents to the index
 | attribute | description | optional | default value | possible values |
 |:-----------|:-----------|:---------|:--------------|:----------------|
 |config-ref|Specify which configuration to use for this invocation|yes||
-|filePattern| File to add content from. Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all
-                   files in the directory, recursively. Fileglobs (e.g. *.c) are not yet supported.|no||
+|filePattern| File to add content from. Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all files in the directory, recursively.|no||
 
 Create Branch
 -------------
@@ -108,11 +107,8 @@ Create a local branch
 |:-----------|:-----------|:---------|:--------------|:----------------|
 |config-ref|Specify which configuration to use for this invocation|yes||
 |name|       Name of the new branch|no||
-|force|      If true and the branch with the given name already exists, the start-point of an
-                  existing branch will be set to a new start-point; if false, the existing branch will not be
-                  changed.|yes|false|
-|startPoint| The new branch head will point to this commit. It may be given as a branch name,
-                  a commit-id, or a tag. If this option is omitted, the current HEAD will be used instead.|yes|HEAD|
+|force|      If true and the branch with the given name already exists, the start-point of an existing branch will be set to a new start-point; if false, the existing branch will not be changed.|yes|false|
+|startPoint| The new branch head will point to this commit. It may be given as a branch name, a commit-id, or a tag. If this option is omitted, the current HEAD will be used instead.|yes|HEAD|
 
 Delete Branch
 -------------
@@ -129,8 +125,7 @@ Delete local branch
 |:-----------|:-----------|:---------|:--------------|:----------------|
 |config-ref|Specify which configuration to use for this invocation|yes||
 |name|  Name of the branch to delete|no||
-|force| If false a check will be performed whether the branch to be deleted is already merged into the
-             current branch and deletion will be refused in this case|no||
+|force| If false a check will be performed whether the branch to be deleted is already merged into the current branch and deletion will be refused in this case|no||
 
 Commit
 ------
