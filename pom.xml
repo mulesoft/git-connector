@@ -63,7 +63,7 @@
             <plugin>
                 <groupId>org.mule.tools</groupId>
                 <artifactId>mule-cloud-connector-maven-plugin</artifactId>
-                <version>2.0.11</version>
+                <version>2.0.12</version>
                 <extensions>true</extensions>
             </plugin>
 
@@ -200,7 +200,7 @@
         <dependency>
             <groupId>org.mule.tools</groupId>
             <artifactId>mule-cloud-connector-annotations</artifactId>
-            <version>2.0.11</version>
+            <version>2.0.12</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jgit</groupId>
