@@ -51,17 +51,19 @@ public class GitConnector
      * @param bare True if you want a bare Git repository, false otherwise.
      * @param remote Name of the remote to keep track of the upstream repository.
      * @param branch Name of the local branch into which the remote will be cloned.
+     * @param overrideDirectory Name of the directory to use for git repository
      */
     @Operation(name = "clone")
     public void cloneRepository(String uri, @Parameter(optional = true, defaultValue = "false") boolean bare, @Parameter(optional = true, defaultValue = "origin") String remote,
-                                @Parameter(optional = true, defaultValue = "HEAD") String branch)
+                                @Parameter(optional = true, defaultValue = "HEAD") String branch, @Parameter(optional = true) String overrideDirectory)
     {
-        File dir = new File(directory);
+        File dir = resolveDirectory(overrideDirectory);
+        
         if (!dir.exists())
         {
             if (!dir.mkdirs())
             {
-                throw new RuntimeException("Directory " + directory + " cannot be created");
+                throw new RuntimeException("Directory " + dir.getAbsolutePath() + " cannot be created");
             }
         }
 
@@ -90,13 +92,14 @@ public class GitConnector
      * }
      *
      * @param filePattern File to add content from. Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all files in the directory, recursively.
+     * @param overrideDirectory Name of the directory to use for git repository
      */
     @Operation
-    public void add(String filePattern)
+    public void add(String filePattern, @Parameter(optional = true) String overrideDirectory)
     {
         try
         {
-            Git git = new Git(getGitRepo());
+            Git git = new Git(getGitRepo(overrideDirectory));
             AddCommand add = git.add();
             add.addFilepattern(filePattern);
 
@@ -119,13 +122,14 @@ public class GitConnector
      * @param name       Name of the new branch
      * @param force      If true and the branch with the given name already exists, the start-point of an existing branch will be set to a new start-point; if false, the existing branch will not be changed.
      * @param startPoint The new branch head will point to this commit. It may be given as a branch name, a commit-id, or a tag. If this option is omitted, the current HEAD will be used instead.
+     * @param overrideDirectory Name of the directory to use for git repository
      */
     @Operation
-    public void createBranch(String name, @Parameter(optional = true, defaultValue = "false") boolean force, @Parameter(optional = true, defaultValue = "HEAD") String startPoint)
+    public void createBranch(String name, @Parameter(optional = true, defaultValue = "false") boolean force, @Parameter(optional = true, defaultValue = "HEAD") String startPoint, @Parameter(optional = true) String overrideDirectory)
     {
         try
         {
-            Git git = new Git(getGitRepo());
+            Git git = new Git(getGitRepo(overrideDirectory));
             CreateBranchCommand createBranch = git.branchCreate();
             createBranch.setName(name);
             createBranch.setForce(force);
@@ -148,13 +152,14 @@ public class GitConnector
      *
      * @param name  Name of the branch to delete
      * @param force If false a check will be performed whether the branch to be deleted is already merged into the current branch and deletion will be refused in this case
+     * @param overrideDirectory Name of the directory to use for git repository
      */
     @Operation
-    public void deleteBranch(String name, boolean force)
+    public void deleteBranch(String name, boolean force, @Parameter(optional = true) String overrideDirectory)
     {
         try
         {
-            Git git = new Git(getGitRepo());
+            Git git = new Git(getGitRepo(overrideDirectory));
             DeleteBranchCommand deleteBranch = git.branchDelete();
             deleteBranch.setBranchNames(name);
             deleteBranch.setForce(force);
@@ -180,13 +185,14 @@ public class GitConnector
      * @param committerEmail Email of the person performing this commit
      * @param authorName     Name of the author of the changes to commit
      * @param authorEmail    Email of the author of the changes to commit
+     * @param overrideDirectory Name of the directory to use for git repository
      */
     @Operation
-    public void commit(String msg, String committerName, String committerEmail, @Parameter(optional = true) String authorName, @Parameter(optional = true) String authorEmail)
+    public void commit(String msg, String committerName, String committerEmail, @Parameter(optional = true) String authorName, @Parameter(optional = true) String authorEmail, @Parameter(optional = true) String overrideDirectory)
     {
         try
         {
-            Git git = new Git(getGitRepo());
+            Git git = new Git(getGitRepo(overrideDirectory));
             CommitCommand commit = git.commit();
             if (authorName != null && authorEmail != null)
             {
@@ -214,13 +220,14 @@ public class GitConnector
      *
      * @param remote The remote (uri or name) used for the push operation.
      * @param force  Sets the force preference for push operation
+     * @param overrideDirectory Name of the directory to use for git repository
      */
     @Operation
-    public void push(@Parameter(optional = true, defaultValue = "origin") String remote, @Parameter(optional = true, defaultValue = "false") boolean force)
+    public void push(@Parameter(optional = true, defaultValue = "origin") String remote, @Parameter(optional = true, defaultValue = "false") boolean force, @Parameter(optional = true) String overrideDirectory)
     {
         try
         {
-            Git git = new Git(getGitRepo());
+            Git git = new Git(getGitRepo(overrideDirectory));
             PushCommand push = git.push();
             push.setRemote(remote);
             push.setForce(force);
@@ -241,13 +248,14 @@ public class GitConnector
      * <git:pull config-ref="s3repo"/>
      * }
      *
+     * @param overrideDirectory Name of the directory to use for git repository
      */
     @Operation
-    public void pull()
+    public void pull(@Parameter(optional = true) String overrideDirectory)
     {
         try
         {
-            Git git = new Git(getGitRepo());
+            Git git = new Git(getGitRepo(overrideDirectory));
             PullCommand pull = git.pull();
             pull.call();
         }
@@ -258,12 +266,30 @@ public class GitConnector
 
     }
 
-    private Repository getGitRepo() throws IOException
+    /**
+     * Depending on the value of overrideDirectory, it returns the directory to
+     * use as the git repo.
+     * 
+     * @param overrideDirectory
+     *            path or null if default is required
+     * @return file pointing to repository directory to use
+     */
+    private File resolveDirectory(String overrideDirectory) {
+        File dir;
+        if (overrideDirectory == null) {
+            dir = new File(this.directory);
+        } else {
+            dir = new File(overrideDirectory);
+        }
+        return dir;
+    }
+
+    private Repository getGitRepo(String overrideDirectory) throws IOException
     {
-        File dir = new File(directory);
+        File dir = resolveDirectory(overrideDirectory);
         if (!dir.exists())
         {
-            throw new RuntimeException("Directory " + directory + " does not exists");
+            throw new RuntimeException("Directory " + dir.getAbsolutePath() + " does not exists");
         }
 
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
