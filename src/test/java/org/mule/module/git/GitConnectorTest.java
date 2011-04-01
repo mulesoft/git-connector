@@ -67,7 +67,20 @@ public class GitConnectorTest {
         assertTrue(new File(location, "b").exists()); 
     }
     
-
+    @Test
+    public void testCheckoutBranchFromRemoteRepo() {
+        gitConnector.cloneRepository(REMOTE_REPO, false, "origin", "HEAD", null);
+        gitConnector.checkout("my-branch", "origin/test-branch", null);
+        assertTrue(new File(location, "b").exists()); 
+    }
+    
+    @Test
+    public void testCheckoutLocalBranch() {
+        gitConnector.cloneRepository(REMOTE_REPO, false, "origin", "HEAD", null);
+        gitConnector.createBranch("my-branch", false, "origin/test-branch", null);
+        gitConnector.checkout("my-branch", null, null);
+        assertTrue(new File(location, "b").exists()); 
+    }
     
     @Test
     public void testFetch() {

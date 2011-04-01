@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.jgit.api.AddCommand;
+import org.eclipse.jgit.api.CheckoutCommand;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.CreateBranchCommand;
@@ -23,6 +24,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullCommand;
 import org.eclipse.jgit.api.PushCommand;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.mule.tools.cloudconnect.annotations.Connector;
 import org.mule.tools.cloudconnect.annotations.Operation;
@@ -134,7 +136,6 @@ public class GitConnector
             createBranch.setName(name);
             createBranch.setForce(force);
             createBranch.setStartPoint(startPoint);
-
             createBranch.call();
         }
         catch (Exception e)
@@ -283,6 +284,46 @@ public class GitConnector
             Git git = new Git(getGitRepo(overrideDirectory));
             FetchCommand fetch = git.fetch();
             fetch.call();
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Unable to fetch", e);
+        }
+        
+    }
+    
+    /**
+     * Checkout a local branch or create a local branch from a remote branch
+     *
+     * {@code
+     * <git:checkout config-ref="s3repo" branch="my-topic-branch" start-point="origin/my-topic-branch"/>
+     * }
+     *
+     * or 
+     *
+     * {@code
+     * <git:checkout config-ref="s3repo" branch="my-topic-branch"/>
+     * }
+     *
+     * @param startPoint If specified creates a new branch pointing to this startPoint
+     * @param branch Name of the branch to checkout
+     * @param overrideDirectory Name of the directory to use for git repository
+     */
+    @Operation
+    public void checkout(String branch, @Parameter(optional = true) String startPoint, @Parameter(optional = true) String overrideDirectory)
+    {
+        try
+        {
+            Git git = new Git(getGitRepo(overrideDirectory));
+            CheckoutCommand checkout = git.checkout();
+            
+            checkout.setName(branch);
+            if (startPoint != null) {
+                checkout.setCreateBranch(true);
+                checkout.setStartPoint(startPoint);
+            }
+            
+            checkout.call();
         }
         catch (Exception e)
         {
