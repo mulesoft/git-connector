@@ -10,11 +10,6 @@
 
 package org.mule.module.git;
 
-import org.mule.tools.cloudconnect.annotations.Connector;
-import org.mule.tools.cloudconnect.annotations.Operation;
-import org.mule.tools.cloudconnect.annotations.Parameter;
-import org.mule.tools.cloudconnect.annotations.Property;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -23,11 +18,16 @@ import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.CreateBranchCommand;
 import org.eclipse.jgit.api.DeleteBranchCommand;
+import org.eclipse.jgit.api.FetchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullCommand;
 import org.eclipse.jgit.api.PushCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.mule.tools.cloudconnect.annotations.Connector;
+import org.mule.tools.cloudconnect.annotations.Operation;
+import org.mule.tools.cloudconnect.annotations.Parameter;
+import org.mule.tools.cloudconnect.annotations.Property;
 
 @Connector(namespacePrefix = "git")
 public class GitConnector
@@ -264,6 +264,31 @@ public class GitConnector
             throw new RuntimeException("Unable to pull", e);
         }
 
+    }
+    
+    /**
+     * Fetch changes from another repository 
+     *
+     * {@code
+     * <git:fetch config-ref="s3repo"/>
+     * }
+     *
+     * @param overrideDirectory Name of the directory to use for git repository
+     */
+    @Operation
+    public void fetch(@Parameter(optional = true) String overrideDirectory)
+    {
+        try
+        {
+            Git git = new Git(getGitRepo(overrideDirectory));
+            FetchCommand fetch = git.fetch();
+            fetch.call();
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Unable to fetch", e);
+        }
+        
     }
 
     /**
