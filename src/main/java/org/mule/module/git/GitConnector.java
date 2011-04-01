@@ -318,9 +318,10 @@ public class GitConnector
         }
 
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
-        builder.setGitDir(dir);
-        builder.readEnvironment();
-        builder.findGitDir();
+        builder.setWorkTree(dir);
+//        builder.setGitDir(dir);
+//        builder.readEnvironment();
+//        builder.findGitDir();
         return builder.build();
     }
 
