@@ -296,7 +296,7 @@ public class GitConnector
      * Checkout a local branch or create a local branch from a remote branch
      *
      * {@code
-     * <git:checkout config-ref="s3repo" branch="my-topic-branch" start-point="origin/my-topic-branch"/>
+     * <git:checkout config-ref="s3repo" branch="my-topic-branch" startPoint="origin/my-topic-branch"/>
      * }
      *
      * or 

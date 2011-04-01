@@ -215,7 +215,7 @@ or
 
 
     
-    <git:checkout config-ref="s3repo" branch="my-topic-branch" start-point="origin/my-topic-branch"/>
+    <git:checkout config-ref="s3repo" branch="my-topic-branch" startPoint="origin/my-topic-branch"/>
     
 
 | attribute | description | optional | default value | possible values |
