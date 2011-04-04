@@ -5,7 +5,7 @@
     <artifactId>mule-module-git</artifactId>
     <packaging>cloud-connector</packaging>
     <name>Mule Git Connector</name>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
     <description>Git is a free and open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency. This connector will allow to interact with Git repositories.</description>
     <url>http://www.muleforge.org/projects/mule-module-git</url>
 
