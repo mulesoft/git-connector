@@ -25,8 +25,8 @@ Add the connector's maven repo to your pom.xml:
     <repositories>
         <repository>
             <id>muleforge-releases</id>
-            <name>MuleForge Snapshot Repository</name>
-            <url>https://repository.muleforge.org/release/</url>
+            <name>MuleForge Releases Repository</name>
+            <url>https://repository.muleforge.org/releases/</url>
             <layout>default</layout>
         </repsitory>
     </repositories>
@@ -38,7 +38,7 @@ application:
     <dependency>
         <groupId>org.mule.modules</groupId>
         <artifactId>mule-module-git</artifactId>
-        <version>1.2-SNAPSHOT</version>
+        <version>1.4-SNAPSHOT</version>
     </dependency>
 
 Configuration
