@@ -19,6 +19,7 @@
     <junit.version>4.8.2</junit.version>
     <mockito.version>1.8.2</mockito.version>
     <slf4j.version>1.6.1</slf4j.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
   </properties>
 
 
@@ -332,11 +333,6 @@
     </dependency>
 
     <!--  Mule & Devkit -->
-    <dependency>
-      <groupId>org.mule.modules</groupId>
-      <artifactId>mule-module-spring-config</artifactId>
-      <version>${mule.version}</version>
-    </dependency>
     <dependency>
       <groupId>org.mule.tools.devkit</groupId>
       <artifactId>mule-devkit-annotations</artifactId>
