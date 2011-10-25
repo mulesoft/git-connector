@@ -10,6 +10,12 @@
 
 package org.mule.module.git;
 
+import org.mule.api.annotations.Configurable;
+import org.mule.api.annotations.Module;
+import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.param.Default;
+import org.mule.api.annotations.param.Optional;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -24,30 +30,40 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullCommand;
 import org.eclipse.jgit.api.PushCommand;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
-import org.mule.tools.cloudconnect.annotations.Connector;
-import org.mule.tools.cloudconnect.annotations.Operation;
-import org.mule.tools.cloudconnect.annotations.Parameter;
-import org.mule.tools.cloudconnect.annotations.Property;
 
-@Connector(namespacePrefix = "git")
+/**
+ * {@link GitConnector} is a Cloud Connector Facade for <a href="http://git-scm.com/">GIT</a> SCM.
+ * 
+ * It allows to 
+ * 
+ * <ul>
+ * <li>clone repositories</li>
+ * <li>create and delete branches</li>
+ * <li>push, pull and fetch repositories</li>
+ * <li>checkout branches, tags and revisions</li>
+ * <li>commit revisions</li>
+ * 
+ * </ul>
+ * 
+ * @author MuleSoft, Inc.
+ * @author flbulgarelli
+ */
+@Module(name = "git", schemaVersion = "2.0")
 public class GitConnector
 {
 
     /**
      * Directory of your git repository
      */
-    @Property
+    @Configurable
     private String directory;
 
 
     /**
      * Clone a repository into a new directory
      *
-     * {@code
-     * <git:clone config-ref="s3repo" uri="git@github.com:mulesoft/s3-connector.git"/>
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:clone}
      *
      * @param uri The (possibly remote) repository to clone from.
      * @param bare True if you want a bare Git repository, false otherwise.
@@ -55,9 +71,9 @@ public class GitConnector
      * @param branch Name of the local branch into which the remote will be cloned.
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Operation(name = "clone")
-    public void cloneRepository(String uri, @Parameter(optional = true, defaultValue = "false") boolean bare, @Parameter(optional = true, defaultValue = "origin") String remote,
-                                @Parameter(optional = true, defaultValue = "HEAD") String branch, @Parameter(optional = true) String overrideDirectory)
+    @Processor(name = "clone")
+    public void cloneRepository(String uri, @Optional @Default( "false") boolean bare, @Optional @Default( "origin") String remote,
+                                @Optional @Default( "HEAD") String branch, @Optional String overrideDirectory)
     {
         File dir = resolveDirectory(overrideDirectory);
         
@@ -89,15 +105,13 @@ public class GitConnector
     /**
      * Add file contents to the index
      *
-     * {@code
-     * <git:add config-ref="s3repo" filePattern="README.txt"/>
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:add}
      *
      * @param filePattern File to add content from. Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all files in the directory, recursively.
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Operation
-    public void add(String filePattern, @Parameter(optional = true) String overrideDirectory)
+    @Processor
+    public void add(String filePattern, @Optional String overrideDirectory)
     {
         try
         {
@@ -116,18 +130,15 @@ public class GitConnector
     /**
      * Create a local branch
      *
-     * {@code
-     * <git:create-branch config-ref="s3repo" name="myexperiment"
-     * startPoint="bd1c1156a06576f4339af4cb9a5cfddfcc80154e">
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:create-branch}
      *
      * @param name       Name of the new branch
      * @param force      If true and the branch with the given name already exists, the start-point of an existing branch will be set to a new start-point; if false, the existing branch will not be changed.
      * @param startPoint The new branch head will point to this commit. It may be given as a branch name, a commit-id, or a tag. If this option is omitted, the current HEAD will be used instead.
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Operation
-    public void createBranch(String name, @Parameter(optional = true, defaultValue = "false") boolean force, @Parameter(optional = true, defaultValue = "HEAD") String startPoint, @Parameter(optional = true) String overrideDirectory)
+    @Processor
+    public void createBranch(String name, @Optional @Default( "false") boolean force, @Optional @Default( "HEAD") String startPoint, @Optional String overrideDirectory)
     {
         try
         {
@@ -147,16 +158,14 @@ public class GitConnector
     /**
      * Delete local branch
      *
-     * {@code
-     * <git:delete-branch config-ref="s3repo" name="myexperiment"/>
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:delete-branch}
      *
      * @param name  Name of the branch to delete
      * @param force If false a check will be performed whether the branch to be deleted is already merged into the current branch and deletion will be refused in this case
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Operation
-    public void deleteBranch(String name, boolean force, @Parameter(optional = true) String overrideDirectory)
+    @Processor
+    public void deleteBranch(String name, boolean force, @Optional String overrideDirectory)
     {
         try
         {
@@ -176,10 +185,7 @@ public class GitConnector
     /**
      * Record changes to the repository
      *
-     * {@code
-     * <git:commit config-ref="s3repo" msg="Updated README.txt" committerName="John Doe"
-     *             committerEmail="john@doe.net">
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:commit}
      *
      * @param msg            Commit message
      * @param committerName  Name of the person performing this commit
@@ -188,8 +194,8 @@ public class GitConnector
      * @param authorEmail    Email of the author of the changes to commit
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Operation
-    public void commit(String msg, String committerName, String committerEmail, @Parameter(optional = true) String authorName, @Parameter(optional = true) String authorEmail, @Parameter(optional = true) String overrideDirectory)
+    @Processor
+    public void commit(String msg, String committerName, String committerEmail, @Optional String authorName, @Optional String authorEmail, @Optional String overrideDirectory)
     {
         try
         {
@@ -215,16 +221,14 @@ public class GitConnector
     /**
      * Update remote refs along with associated objects
      *
-     * {@code
-     * <git:push config-ref="s3repo" remote="origin"/>
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:push}
      *
      * @param remote The remote (uri or name) used for the push operation.
      * @param force  Sets the force preference for push operation
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Operation
-    public void push(@Parameter(optional = true, defaultValue = "origin") String remote, @Parameter(optional = true, defaultValue = "false") boolean force, @Parameter(optional = true) String overrideDirectory)
+    @Processor
+    public void push(@Optional @Default( "origin") String remote, @Optional @Default( "false") boolean force, @Optional String overrideDirectory)
     {
         try
         {
@@ -245,14 +249,12 @@ public class GitConnector
     /**
      * Fetch from and merge with another repository or a local branch
      *
-     * {@code
-     * <git:pull config-ref="s3repo"/>
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:pull}
      *
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Operation
-    public void pull(@Parameter(optional = true) String overrideDirectory)
+    @Processor
+    public void pull(@Optional String overrideDirectory)
     {
         try
         {
@@ -270,14 +272,12 @@ public class GitConnector
     /**
      * Fetch changes from another repository 
      *
-     * {@code
-     * <git:fetch config-ref="s3repo"/>
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:fetch}
      *
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Operation
-    public void fetch(@Parameter(optional = true) String overrideDirectory)
+    @Processor
+    public void fetch(@Optional String overrideDirectory)
     {
         try
         {
@@ -295,22 +295,18 @@ public class GitConnector
     /**
      * Checkout a local branch or create a local branch from a remote branch
      *
-     * {@code
-     * <git:checkout config-ref="s3repo" branch="my-topic-branch" startPoint="origin/my-topic-branch"/>
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:checkout}
      *
      * or 
      *
-     * {@code
-     * <git:checkout config-ref="s3repo" branch="my-topic-branch"/>
-     * }
+     * {@sample.xml ../../../doc/mule-module-git.xml.sample git:checkout}
      *
      * @param startPoint If specified creates a new branch pointing to this startPoint
      * @param branch Name of the branch to checkout
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Operation
-    public void checkout(String branch, @Parameter(optional = true) String startPoint, @Parameter(optional = true) String overrideDirectory)
+    @Processor
+    public void checkout(String branch, @Optional String startPoint, @Optional String overrideDirectory)
     {
         try
         {
