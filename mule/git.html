@@ -111,15 +111,19 @@
       <span id="masthead-title">Mule Git Connector</span>
     
     <ul id="header-tabs" class="mule">
+    
     	<li id="guide"><a href="../guide/install.html">
 	    	<span class="en">Install Guide</span>
     	</a></li>
+    
     	<li id="java"><a href="../java/packages.html">
-	    	<span class="en">Java API</span>
+	    	<span class="en">Java API Reference</span>
     	</a></li>
+    
     	<li id="mule"><a href="../mule/modules.html">
-	    	<span class="en">Mule API</span>
+	    	<span class="en">Mule API Reference</span>
     	</a></li>
+    
     </ul>
     </div>
     <div id="headerRight">
@@ -221,7 +225,7 @@ Summary:
 
 
 <h2>Module Overview</h2>
-<p><br/><code><a href="../java/org/mule/module/git/GitConnector.html">GitConnector</a></code> is a Cloud Connector Facade for <a href="http://git-scm.com/">GIT</a> SCM.
+<p><code><a href="../java/org/mule/module/git/GitConnector.html">GitConnector</a></code> is a Cloud Connector Facade for <a href="http://git-scm.com/">GIT</a> SCM.
  
  It allows to 
  
@@ -232,7 +236,7 @@ Summary:
  <li>checkout branches, tags and revisions</li>
  <li>commit revisions</li>
  
- </ul><br/></p>
+ </ul></p>
 
 
 </div><!-- jd-descr -->
@@ -450,6 +454,8 @@ specify which configuration to use.</p>
 
 
 
+
+
 <!-- ========= MESSAGE PROCESSOR DETAIL ======== -->
 <!-- Message Processors -->
 
@@ -472,21 +478,23 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Add file contents to the index
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:add config-ref="s3repo" filePattern="README.txt"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:add config-ref="s3repo" filePattern="README.txt"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>filePattern</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">File to add content from. Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all files in the directory, recursively.<br/></td>
+                    <td class="jd-descrcol" width="100%">File to add content from. Also a leading directory name (e.g. dir to add dir/file1 and dir/file2) can be given to add all files in the directory, recursively.</td>
                 </tr>
                 
                 
@@ -496,26 +504,18 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>overrideDirectory</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the directory to use for git repository
-<br/></td>
+</td>
                 </tr>
                 
                 
           
           
-            <tr class=" api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -524,6 +524,8 @@ specify which configuration to use.</p>
           
       </table>
   </div>
+  
+    
   
 
     </div>
@@ -545,25 +547,27 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Checkout a local branch or create a local branch from a remote branch
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:checkout config-ref="s3repo" branch="my-topic-branch" startPoint="origin/my-topic-branch"/&gt;</pre></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:checkout config-ref="s3repo" branch="my-topic-branch" startPoint="origin/my-topic-branch"/&gt;</pre></div>
 
  or 
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:checkout config-ref="s3repo" branch="my-topic-branch" startPoint="origin/my-topic-branch"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:checkout config-ref="s3repo" branch="my-topic-branch" startPoint="origin/my-topic-branch"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>branch</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Name of the branch to checkout<br/></td>
+                    <td class="jd-descrcol" width="100%">Name of the branch to checkout</td>
                 </tr>
                 
                 
@@ -572,7 +576,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>startPoint</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>If specified creates a new branch pointing to this startPoint<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>If specified creates a new branch pointing to this startPoint</td>
                 </tr>
                 
                 
@@ -582,26 +586,18 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>overrideDirectory</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the directory to use for git repository
-<br/></td>
+</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -612,6 +608,8 @@ specify which configuration to use.</p>
           
       </table>
   </div>
+  
+    
   
 
     </div>
@@ -633,21 +631,23 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Clone a repository into a new directory
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:clone config-ref="s3repo" uri="git@github.com:mulesoft/s3-connector.git"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:clone config-ref="s3repo" uri="git@github.com:mulesoft/s3-connector.git"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>uri</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">The (possibly remote) repository to clone from.<br/></td>
+                    <td class="jd-descrcol" width="100%">The (possibly remote) repository to clone from.</td>
                 </tr>
                 
                 
@@ -656,7 +656,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>bare</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True if you want a bare Git repository, false otherwise.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True if you want a bare Git repository, false otherwise.</td>
                 </tr>
                 
                 
@@ -665,7 +665,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>remote</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the remote to keep track of the upstream repository.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the remote to keep track of the upstream repository.</td>
                 </tr>
                 
                 
@@ -674,7 +674,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>branch</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the local branch into which the remote will be cloned.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the local branch into which the remote will be cloned.</td>
                 </tr>
                 
                 
@@ -684,26 +684,18 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>overrideDirectory</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the directory to use for git repository
-<br/></td>
+</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -718,6 +710,8 @@ specify which configuration to use.</p>
           
       </table>
   </div>
+  
+    
   
 
     </div>
@@ -739,22 +733,24 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Record changes to the repository
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:commit config-ref="s3repo" msg="Updated README.txt" committerName="John Doe"
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:commit config-ref="s3repo" msg="Updated README.txt" committerName="John Doe"
                   committerEmail="john@doe.net"&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>msg</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Commit message<br/></td>
+                    <td class="jd-descrcol" width="100%">Commit message</td>
                 </tr>
                 
                 
@@ -763,7 +759,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>committerName</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Name of the person performing this commit<br/></td>
+                    <td class="jd-descrcol" width="100%">Name of the person performing this commit</td>
                 </tr>
                 
                 
@@ -772,7 +768,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>committerEmail</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Email of the person performing this commit<br/></td>
+                    <td class="jd-descrcol" width="100%">Email of the person performing this commit</td>
                 </tr>
                 
                 
@@ -781,7 +777,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>authorName</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the author of the changes to commit<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the author of the changes to commit</td>
                 </tr>
                 
                 
@@ -790,7 +786,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>authorEmail</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Email of the author of the changes to commit<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Email of the author of the changes to commit</td>
                 </tr>
                 
                 
@@ -800,26 +796,18 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>overrideDirectory</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the directory to use for git repository
-<br/></td>
+</td>
                 </tr>
                 
                 
           
           
-            <tr class=" api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -836,6 +824,8 @@ specify which configuration to use.</p>
           
       </table>
   </div>
+  
+    
   
 
     </div>
@@ -857,22 +847,24 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Create a local branch
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:create-branch config-ref="s3repo" name="myexperiment"
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:create-branch config-ref="s3repo" name="myexperiment"
       startPoint="bd1c1156a06576f4339af4cb9a5cfddfcc80154e"&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>name</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Name of the new branch<br/></td>
+                    <td class="jd-descrcol" width="100%">Name of the new branch</td>
                 </tr>
                 
                 
@@ -881,7 +873,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>force</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>If true and the branch with the given name already exists, the start-point of an existing branch will be set to a new start-point; if false, the existing branch will not be changed.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>If true and the branch with the given name already exists, the start-point of an existing branch will be set to a new start-point; if false, the existing branch will not be changed.</td>
                 </tr>
                 
                 
@@ -890,7 +882,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>startPoint</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The new branch head will point to this commit. It may be given as a branch name, a commit-id, or a tag. If this option is omitted, the current HEAD will be used instead.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The new branch head will point to this commit. It may be given as a branch name, a commit-id, or a tag. If this option is omitted, the current HEAD will be used instead.</td>
                 </tr>
                 
                 
@@ -900,26 +892,18 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>overrideDirectory</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the directory to use for git repository
-<br/></td>
+</td>
                 </tr>
                 
                 
           
           
-            <tr class=" api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -932,6 +916,8 @@ specify which configuration to use.</p>
           
       </table>
   </div>
+  
+    
   
 
     </div>
@@ -953,21 +939,23 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Delete local branch
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:delete-branch config-ref="s3repo" name="myexperiment"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:delete-branch config-ref="s3repo" name="myexperiment"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>name</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Name of the branch to delete<br/></td>
+                    <td class="jd-descrcol" width="100%">Name of the branch to delete</td>
                 </tr>
                 
                 
@@ -976,7 +964,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>force</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">If false a check will be performed whether the branch to be deleted is already merged into the current branch and deletion will be refused in this case<br/></td>
+                    <td class="jd-descrcol" width="100%">If false a check will be performed whether the branch to be deleted is already merged into the current branch and deletion will be refused in this case</td>
                 </tr>
                 
                 
@@ -986,26 +974,18 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>overrideDirectory</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the directory to use for git repository
-<br/></td>
+</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -1016,6 +996,8 @@ specify which configuration to use.</p>
           
       </table>
   </div>
+  
+    
   
 
     </div>
@@ -1037,14 +1019,16 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Fetch changes from another repository 
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:fetch config-ref="s3repo"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:fetch config-ref="s3repo"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
@@ -1052,32 +1036,26 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>overrideDirectory</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the directory to use for git repository
-<br/></td>
+</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
           
       </table>
   </div>
+  
+    
   
 
     </div>
@@ -1099,14 +1077,16 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Fetch from and merge with another repository or a local branch
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:pull config-ref="s3repo"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:pull config-ref="s3repo"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
@@ -1114,32 +1094,26 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>overrideDirectory</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the directory to use for git repository
-<br/></td>
+</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
           
       </table>
   </div>
+  
+    
   
 
     </div>
@@ -1161,21 +1135,23 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Update remote refs along with associated objects
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:push config-ref="s3repo" remote="origin"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;git:push config-ref="s3repo" remote="origin"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>remote</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The remote (uri or name) used for the push operation.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The remote (uri or name) used for the push operation.</td>
                 </tr>
                 
                 
@@ -1184,7 +1160,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>force</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Sets the force preference for push operation<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Sets the force preference for push operation</td>
                 </tr>
                 
                 
@@ -1194,26 +1170,18 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>overrideDirectory</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Name of the directory to use for git repository
-<br/></td>
+</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -1224,6 +1192,8 @@ specify which configuration to use.</p>
           
       </table>
   </div>
+  
+    
   
 
     </div>
