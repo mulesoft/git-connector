@@ -1,8 +1,8 @@
-target
-.settings
-.classpath
-.project
-.checkstyle
-.springBeans
-velocity.log
-.DS_Store
+/.classpath
+/.settings
+/.project
+/.jruby
+/*.iml
+/*.ipr
+/*.iws
+/target
