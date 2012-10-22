@@ -1,5 +1,5 @@
 <!-- BEGIN_INCLUDE(git:clone) -->
-<git:clone config-ref="s3repo" uri="git@github.com:mulesoft/s3-connector.git"/>
+<git:clone-repository config-ref="s3repo" uri="git@github.com:mulesoft/s3-connector.git"/>
 <!-- END_INCLUDE(git:clone) -->
 
 <!-- BEGIN_INCLUDE(git:add) -->
@@ -7,17 +7,17 @@
 <!-- END_INCLUDE(git:add) -->
 
 <!-- BEGIN_INCLUDE(git:create-branch) -->
-<git:create-branch config-ref="s3repo" name="myexperiment"
-      startPoint="bd1c1156a06576f4339af4cb9a5cfddfcc80154e">
+<git:create-branch config-ref="s3repo" branchName="myexperiment" force="true"
+      startPoint="bd1c1156a06576f4339af4cb9a5cfddfcc80154e" />
 <!-- END_INCLUDE(git:create-branch) -->
 
 <!-- BEGIN_INCLUDE(git:delete-branch) -->
-<git:delete-branch config-ref="s3repo" name="myexperiment"/>
+<git:delete-branch config-ref="s3repo" branchName="myexperiment" force="true" />
 <!-- END_INCLUDE(git:delete-branch) -->
 
 <!-- BEGIN_INCLUDE(git:commit) -->
 <git:commit config-ref="s3repo" msg="Updated README.txt" committerName="John Doe"
-                  committerEmail="john@doe.net">
+                  committerEmail="john@doe.net" />
 <!-- END_INCLUDE(git:commit) -->
 
 <!-- BEGIN_INCLUDE(git:push) -->

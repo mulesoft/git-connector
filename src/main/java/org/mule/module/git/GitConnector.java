@@ -49,7 +49,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
  * @author MuleSoft, Inc.
  * @author flbulgarelli
  */
-@Module(name = "git", schemaVersion = "2.0")
+@Module(name = "git", schemaVersion = "2.0", friendlyName = "GitHub connector")
 public class GitConnector
 {
 
@@ -71,7 +71,7 @@ public class GitConnector
      * @param branch Name of the local branch into which the remote will be cloned.
      * @param overrideDirectory Name of the directory to use for git repository
      */
-    @Processor(name = "clone")
+    @Processor
     public void cloneRepository(String uri, @Optional @Default( "false") boolean bare, @Optional @Default( "origin") String remote,
                                 @Optional @Default( "HEAD") String branch, @Optional String overrideDirectory)
     {
@@ -132,26 +132,26 @@ public class GitConnector
      *
      * {@sample.xml ../../../doc/mule-module-git.xml.sample git:create-branch}
      *
-     * @param name       Name of the new branch
+     * @param branchName       Name of the new branch
      * @param force      If true and the branch with the given name already exists, the start-point of an existing branch will be set to a new start-point; if false, the existing branch will not be changed.
      * @param startPoint The new branch head will point to this commit. It may be given as a branch name, a commit-id, or a tag. If this option is omitted, the current HEAD will be used instead.
      * @param overrideDirectory Name of the directory to use for git repository
      */
     @Processor
-    public void createBranch(String name, @Optional @Default( "false") boolean force, @Optional @Default( "HEAD") String startPoint, @Optional String overrideDirectory)
+    public void createBranch(String branchName, @Optional @Default( "false") boolean force, @Optional @Default( "HEAD") String startPoint, @Optional String overrideDirectory)
     {
         try
         {
             Git git = new Git(getGitRepo(overrideDirectory));
             CreateBranchCommand createBranch = git.branchCreate();
-            createBranch.setName(name);
+            createBranch.setName(branchName);
             createBranch.setForce(force);
             createBranch.setStartPoint(startPoint);
             createBranch.call();
         }
         catch (Exception e)
         {
-            throw new RuntimeException("Unable to create branch " + name, e);
+            throw new RuntimeException("Unable to create branch " + branchName, e);
         }
     }
 
@@ -160,25 +160,25 @@ public class GitConnector
      *
      * {@sample.xml ../../../doc/mule-module-git.xml.sample git:delete-branch}
      *
-     * @param name  Name of the branch to delete
+     * @param branchName  Name of the branch to delete
      * @param force If false a check will be performed whether the branch to be deleted is already merged into the current branch and deletion will be refused in this case
      * @param overrideDirectory Name of the directory to use for git repository
      */
     @Processor
-    public void deleteBranch(String name, boolean force, @Optional String overrideDirectory)
+    public void deleteBranch(String branchName, boolean force, @Optional String overrideDirectory)
     {
         try
         {
             Git git = new Git(getGitRepo(overrideDirectory));
             DeleteBranchCommand deleteBranch = git.branchDelete();
-            deleteBranch.setBranchNames(name);
+            deleteBranch.setBranchNames(branchName);
             deleteBranch.setForce(force);
 
             deleteBranch.call();
         }
         catch (Exception e)
         {
-            throw new RuntimeException("Unable to create branch " + name, e);
+            throw new RuntimeException("Unable to create branch " + branchName, e);
         }
     }
 
