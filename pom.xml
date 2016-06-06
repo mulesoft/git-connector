@@ -1,65 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <groupId>org.mule.tools.devkit</groupId>
-        <artifactId>mule-devkit-parent</artifactId>
-        <version>3.3.1</version>
-    </parent>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.modules</groupId>
     <artifactId>mule-module-git</artifactId>
+    <version>2.3.0-SNAPSHOT</version>
     <packaging>mule-module</packaging>
-    <name>Mule Git Connector</name>
-    <version>2.2-SNAPSHOT</version>
-    <description>Git is a free and open source, distributed version control system designed to handle everything from
-        small to very large projects with speed and efficiency. This connector will allow to interact with Git
-        repositories.
-    </description>
-    <url>http://www.muleforge.org/projects/mule-module-git</url>
+    <name>Mule Git Anypoint Connector</name>
 
-    <properties>
-      <devkit.studio.package.skip>false</devkit.studio.package.skip>
-    </properties>
+    <parent>
+        <groupId>org.mule.tools.devkit</groupId>
+        <artifactId>mule-devkit-parent</artifactId>
+        <version>3.8.0</version>
+    </parent>
 
     <dependencies>
         <dependency>
             <groupId>org.eclipse.jgit</groupId>
             <artifactId>org.eclipse.jgit</artifactId>
-            <version>1.3.0</version>
+            <version>4.3.0.201604071810-r</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>1.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mule.transports</groupId>
-            <artifactId>mule-transport-axis</artifactId>
-            <version>${mule.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mule.transports</groupId>
-            <artifactId>mule-transport-vm</artifactId>
-            <version>${mule.version}</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
-    <scm>
-        <connection>scm:git:git://github.com:mulesoft/git-connector.git
-        </connection>
-        <developerConnection>
-            scm:git:git@github.com:mulesoft/git-connector.git
-        </developerConnection>
-        <url>http://github.com/mulesoft/git-connector</url>
-    </scm>
-
+    <properties>
+        <category>Community</category>
+        <licensePath>LICENSE.md</licensePath>
+        <devkit.studio.package.skip>false</devkit.studio.package.skip>
+    </properties>
     <repositories>
         <repository>
             <id>mulesoft-releases</id>
@@ -67,6 +35,9 @@
             <url>http://repository.mulesoft.org/releases/</url>
             <layout>default</layout>
         </repository>
+        <repository>
+            <id>jgit-repository</id>
+            <url>https://repo.eclipse.org/content/groups/releases/</url>
+        </repository>
     </repositories>
-
 </project>
