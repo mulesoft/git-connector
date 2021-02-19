@@ -28,7 +28,7 @@ Add the connector's maven repo to your pom.xml:
             <name>MuleForge Releases Repository</name>
             <url>https://repository.muleforge.org/releases/</url>
             <layout>default</layout>
-        </repsitory>
+        </repository>
     </repositories>
 
 Add the connector as a dependency to your project. This can be done by adding
